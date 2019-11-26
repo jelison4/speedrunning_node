@@ -8,7 +8,7 @@ function getCategorys(req, res) {
     if (id != 0) {
         getcategoryFromDB(id, function (error, result) {
             console.log("back from database with result", result);
-            res.json(result)
+            res.json(result);
         });
     }
 }
