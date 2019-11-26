@@ -16,10 +16,12 @@ var app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-//app.get('/', 'home.html');
+app.get('/', (req, res) => res.render('pages/home'));
 app.get("/generateRunTable", table.generateTable);
 app.get("/getGames", game.getGames);
 app.get("/getCats", category.getCategorys);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs')
 
 app.listen(PORT, function () {
     console.log("Server listening on port " + PORT);

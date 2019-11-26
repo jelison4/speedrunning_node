@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dual Quasars</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/speedrunCSS.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="home.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <h1>Dual Quasars</h1>
+    </header>
+
+    <div class='background'>
+        <table>
+            <tr>
+                <td>
+                    <strong>Select a game:</strong>
+                </td>
+                <td>
+                    <select id='gameSelect' onChange='generateCatDropdown()'>
+                        <option value='0'>Select a Game</option>
+                        <option value='5'>Celeste</option>
+                        <option value='16'>Portal</option>
+                        <option value='1'>Sekiro</option>
+                        <option value='4'>Super Metroid</option>
+                    </select>
+                </td>
+                <td>
+                    <strong>Filter by category type:</strong>
+                </td>
+                <td>
+                    <select id='runCategory' onChange='generateTable()'>
+                        <option value=''>-</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <table id='runTable'></table>
+
+        <br>
+        <table>
+            <tr>
+            </tr>
+        </table>
+    </div>
+    
+    <% include ../partials/loginModal.ejs %>
+
+    <% include ../partials/registerModal.ejs %>
+
+</body>
+</html>

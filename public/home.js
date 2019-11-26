@@ -20,3 +20,7 @@ function generateCatDropdown() {
         $('#runCategory').html("<option value=''>-</option>");
     }
 }
+
+function verifyLogin(){
+    
+}
