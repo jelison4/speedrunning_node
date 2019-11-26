@@ -6,6 +6,7 @@
     <title>Dual Quasars</title>
     <link rel="stylesheet" type="text/css" href="stylesheets/speedrunCSS.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="home.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -95,30 +96,4 @@
     </div>
 
 </body>
-
-<script>
-    function generateCatDropdown() {
-        var xhr = new XMLHttpRequest();
-
-        var query = "/getCats?id=" + document.getElementById('gameSelect').value;
-        console.log(query);
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var categorys = JSON.parse(xhr.responseText);
-
-                var categoryDropdown = "<option value=0>Select Category</option>";
-
-                categorys.forEach(element => {
-                    categoryDropdown +=
-                        `<option value=${element.category_id}>${element.category_title}</option>`;
-                });
-                document.getElementById('runCategory').innerHTML = categoryDropdown;
-            }
-        }
-        xhr.open("GET", query, true);
-        xhr.send();
-    }
-</script>
-
 </html>
