@@ -50,9 +50,54 @@
         </table>
     </div>
     
-    <% include ../partials/loginModal.ejs %>
+    <div id="login" class="modal">
+            <span onclick="document.getElementById('login').style.display='none'" class="close"
+                title="Close Modal">&times;</span>
+    
+            <form class="modal-content background" name='loginForm' onsubmit='event.preventDefault(); verifyLogin();'
+                action="userPage.php" method="post">
+    
+                <div class="container">
+                    <br>
+                    <h2>Login</h2>
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" id='uname' required>
+    
+                    <label for="password"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+                </div>
+    
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="submit">Login</button>
+                    <button type="button" onclick="document.getElementById('login').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                </div>
+            </form>
+        </div>
 
-    <% include ../partials/registerModal.ejs %>
-
+        <div id="register" class="modal">
+                <span onclick="document.getElementById('register').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
+            
+                <form class="modal-content background" action="addUser.php" method="post">
+            
+                    <div class="container">
+                        <br>
+                        <h2>Create New Account</h2>
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" id='newName' required>
+            
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="newPass" required>
+            
+                    </div>
+            
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="submit">Register</button>
+                        <button type="button" onclick="document.getElementById('register').style.display='none'"
+                            class="cancelbtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
 </body>
 </html>
