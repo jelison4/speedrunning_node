@@ -12,7 +12,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 //app.get('/', 'home.html');
-app.get("/getRun", table.generateTable);
+app.get("/generateRunTable", table.generateTable);
 app.get("/getGames", game.getGames);
 app.get("/getCats", category.getCategorys);
 

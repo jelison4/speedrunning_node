@@ -9,6 +9,11 @@ function generateTable(req, res) {
     res.json(result);
 }
 
+function generateUserTable(req, res) {
+
+}
+
 module.exports = {
-    generateTable: generateTable
+    generateTable: generateTable,
+    generateUserTable: generateUserTable
 };
