@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dual Quasars</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/speedrunCSS.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <h1>Dual Quasars</h1>
+    </header>
+
+    <div class='background'>
+        <table>
+            <tr>
+                <td><strong>Select a game:</strong></td>
+                <td><select id='gameSelect' onChange='generateCatDropdown()'>
+                        <option value='0'>Select a Game</option>
+                        <option value='5'>Celeste</option>
+                        <option value='16'>Portal</option>
+                        <option value='1'>Sekiro</option>
+                        <option value='4'>Super Metroid</option>
+                    </select></td>
+                <td><strong>Filter by category type:</strong></td>
+                <td><select id='runCategory' onChange='generateTable()'>
+                        <option value=''>-</option>
+
+                    </select></td>
+            </tr>
+        </table>
+
+        <table id='runTable'></table>
+
+        <br>
+        <table>
+            <tr>
+            </tr>
+        </table>
+    </div>
+
+
+    <div id="login" class="modal">
+        <span onclick="document.getElementById('login').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+
+        <form class="modal-content background" name='loginForm' onsubmit='event.preventDefault(); verifyLogin();'
+            action="userPage.php" method="post">
+
+            <div class="container">
+                <br>
+                <h2>Login</h2>
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id='uname' required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="submit">Login</button>
+                <button type="button" onclick="document.getElementById('login').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="register" class="modal">
+        <span onclick="document.getElementById('register').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+
+        <form class="modal-content background" action="addUser.php" method="post">
+
+            <div class="container">
+                <br>
+                <h2>Create New Account</h2>
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id='newName' required>
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" id="newPass" required>
+
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="submit">Register</button>
+                <button type="button" onclick="document.getElementById('register').style.display='none'"
+                    class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+<script>
+    function generateCatDropdown() {
+        var xhr = new XMLHttpRequest();
+
+        var query = "/getCats?id=" + document.getElementById('gameSelect').value;
+        console.log(query);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var categorys = JSON.parse(xhr.responseText);
+
+                var categoryDropdown = "<option value=0>Select Category</option>";
+
+                categorys.forEach(element => {
+                    categoryDropdown +=
+                        `<option value=${element.category_id}>${element.category_title}</option>`;
+                });
+                document.getElementById('runCategory').innerHTML = categoryDropdown;
+            }
+        }
+        xhr.open("GET", query, true);
+        xhr.send();
+    }
+</script>
+
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "speedrunning_node",
+  "version": "1.0.0",
+  "description": "Page for storing and comparing speedrun scores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Josh Elison",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
