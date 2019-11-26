@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body onload="loadGames()">
     <header>
         <h1>Dual Quasars</h1>
     </header>
@@ -24,10 +24,6 @@
                 <td>
                     <select id='gameSelect' onChange='generateCatDropdown()'>
                         <option value='0'>Select a Game</option>
-                        <option value='5'>Celeste</option>
-                        <option value='16'>Portal</option>
-                        <option value='1'>Sekiro</option>
-                        <option value='4'>Super Metroid</option>
                     </select>
                 </td>
                 <td>

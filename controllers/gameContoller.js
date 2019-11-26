@@ -5,16 +5,34 @@ const pool = new Pool({
 });
 
 function getGames(req, res) {
-    sql = "SELECT DISTINCT run.game_id, game.title FROM run, game WHERE run.game_id = game.id ORDER BY game.title;";
+    var sql = "SELECT DISTINCT run.game_id, game.title FROM run, game WHERE run.game_id = game.id ORDER BY game.title;";
 
+    pool.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            callback(err, null);
+        }
+        console.log(result.rows);
+        res.json(result.rows);
+    });
 }
+/* 
+function getgamesFromDB(id, callback) {
+    var sql = "SELECT DISTINCT run.game_id, game.title FROM run, game WHERE run.game_id = game.id ORDER BY game.title;";
+
+    pool.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, result.rows);
+    });
+} */
 
 function getGamePlatforms(req, res) {
-
 }
 
 function getGameCategorys(req, res) {
-
 }
 
 module.exports = {

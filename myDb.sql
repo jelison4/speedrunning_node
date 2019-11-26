@@ -62,7 +62,7 @@ INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES
 INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (6, 5, 4, '00:34:17', True, 2);
 INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (2, 1, 1, '03:54:39', True, 4);
 INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (2, 1, 1, '01:13:45', True, 3);
-
+INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (7, 6, 1, '00:47:46', True, 3);
 
 /* Displaying table with | username | Game | Category | Time | Platform | Validated | */
 SELECT users.username, game.title, category.category_title, run.time, platform.name, run.valid FROM users, run, platform, game, category WHERE run.user_id = users.id AND platform_id = platform.id AND run.game_id = game.id AND run.category_id = category.id ORDER BY run.time;
