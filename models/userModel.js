@@ -10,18 +10,16 @@ function addUser(req, res) {
     var newUsername = req.body.userName;
     var newUserPassword = req.body.password;
 
-    var sql = `INSERT INTO users (username, password, admin) VALUES (${newUsername}, ${newUserPassword}, FALSE);`;
+    var sql = `INSERT INTO users (username, password, admin) VALUES ('${newUsername}', '${newUserPassword}', FALSE);`;
 
     console.log(`creating a new user with the name ${newUsername} and the password ${newUserPassword}`);
 
     console.log(sql);
 
-    res.json({
-        username: newUsername,
-        password: newUserPassword
+    pool.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
     });
-
-    //pool.query(sql, 
 }
 
 module.exports = {
