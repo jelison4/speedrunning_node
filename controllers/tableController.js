@@ -46,8 +46,23 @@ function getAllRunTableFromDB(game_id, callback) {
 }
 
 function getUserTable(req, res) {
+    var username = req.query.username;
+
+    getUserData(username, function (error, result) {
+        res.json(result);
+    });
+}
+
+function getUserData(username, callback) {
     var sql = `SELECT DISTINCT run.id, game.title, run.time, category.category_title, platform.name, run.valid FROM users, run, platform, category, game WHERE run.user_id = users.id AND users.username='${username}' AND platform_id = platform.id AND run.game_id = game.id AND run.category_id = category.id ORDER BY run.time;`;
 
+    pool.query(sql, function (err, res) {
+        if (err) {
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, res.rows);
+    });
 }
 
 module.exports = {

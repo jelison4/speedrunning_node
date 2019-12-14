@@ -27,6 +27,7 @@ app.get('/', (req, res) => res.render('pages/home'));
 app.get('/user', (req, res) => res.render('pages/user'));
 app.get('/submission', (req, res) => res.render('pages/submission'));
 app.get("/getRunTable", table.getRunTable);
+app.get("/getUserTable", table.getUserTable);
 app.get("/getGames", game.getGames);
 app.get("/getCats", category.getCategorys);
 app.set('views', path.join(__dirname, 'views'));

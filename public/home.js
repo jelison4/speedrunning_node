@@ -23,30 +23,23 @@ function generateCatDropdown() {
 }
 
 function loadGames() {
-    var xhr = new XMLHttpRequest();
+    $.ajax({
+        url: "/getGames"
+    }).done(function (result) {
+        var gameSelect = "<option value=0>Select a Game</option>";
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var gameSelect = "<option value=0>Select a Game</option>";
+        result.forEach(element => {
+            gameSelect += `<option value=${element.game_id}>${element.title}</option>`;
+        });
+        console.log(gameSelect);
 
-            var games = JSON.parse(xhr.responseText);
-
-            games.forEach(element => {
-                gameSelect += `<option value=${element.game_id}>${element.title}</option>`;
-            });
-            console.log(gameSelect);
-
-            $('#gameSelect').html(gameSelect);
-        }
-    }
-    xhr.open("GET", "/getGames", true);
-    xhr.send();
+        $('#gameSelect').html(gameSelect);
+    });
 }
 
 function generateTable(req, res) {
     var game_id = $('#gameSelect').val();
     var category_id = $('#runCategory').val();
-
 
     $.get("/getRunTable", {
             game_id: game_id,
@@ -108,7 +101,6 @@ function verifyLogin() {
 }
 
 function addUser() {
-
     var newUsername = $('#newName').val();
     var newPassword = $('#newPass').val();
 
