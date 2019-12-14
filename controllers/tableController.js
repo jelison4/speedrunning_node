@@ -14,6 +14,10 @@ function getRunTable(req, res) {
         getRunTableDataFromDB(game_id, category_id, function (error, result) {
             res.json(result);
         });
+    } else {
+        getAllRunTableFromDB(game_id, function (error, result) {
+            res.json(result);
+        });
     }
 }
 
@@ -29,11 +33,24 @@ function getRunTableDataFromDB(game_id, category_id, callback) {
     });
 }
 
-function generateUserTable(req, res) {
+function getAllRunTableFromDB(game_id, callback) {
+    var sql = `SELECT DISTINCT users.username, run.time, category.category_title, platform.name, run.valid, game.title FROM users, run, platform, category, game WHERE run.user_id = users.id AND platform_id = platform.id AND run.game_id = ${game_id} AND run.category_id = category.id AND game.id=${game_id} ORDER BY run.time;`;
+
+    pool.query(sql, function (err, res) {
+        if (err) {
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, res.rows);
+    });
+}
+
+function getUserTable(req, res) {
+    var sql = `SELECT DISTINCT run.id, game.title, run.time, category.category_title, platform.name, run.valid FROM users, run, platform, category, game WHERE run.user_id = users.id AND users.username='${username}' AND platform_id = platform.id AND run.game_id = game.id AND run.category_id = category.id ORDER BY run.time;`;
 
 }
 
 module.exports = {
     getRunTable: getRunTable,
-    generateUserTable: generateUserTable
+    getUserTable: getUserTable
 };

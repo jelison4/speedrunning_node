@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/speedrunCSS.css">
+    <script src="userJava.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body onload="generateUserTable()">
+    <header>
+        <h1>Dual Quasars</h1>
+    </header>
+
+    <div class=background>
+
+        <table id='userTable'>
+            <tr>
+                <td colspan='3' class='col1'>
+                    <button onclick="window.location.href='/'">
+                        Return to Leaderboard
+                    </button>
+                </td>
+                <td colspan='3' class='col2'>
+                    <button onclick="window.location.href='/submission'">
+                        Submit Run
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+var session = require('express-session');
 require('dotenv').config();
 
 const table = require('./controllers/tableController');
@@ -23,6 +24,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => res.render('pages/home'));
+app.get('/user', (req, res) => res.render('pages/user'));
+app.get('/submission', (req, res) => res.render('pages/submission'));
 app.get("/getRunTable", table.getRunTable);
 app.get("/getGames", game.getGames);
 app.get("/getCats", category.getCategorys);

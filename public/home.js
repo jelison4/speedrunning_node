@@ -9,7 +9,7 @@ function generateCatDropdown() {
             function (data) {
                 var categorys = data;
 
-                var categoryDropdown = "<option value=0>All</option>";
+                var categoryDropdown = "<option value=-1>-</option><option value=0>All</option>";
 
                 categorys.forEach(element => {
                     categoryDropdown += `<option value=${element.category_id}>${element.category_title}</option>`;
@@ -47,15 +47,16 @@ function generateTable(req, res) {
     var game_id = $('#gameSelect').val();
     var category_id = $('#runCategory').val();
 
-    if (category_id != 0) {
-        $.get("/getRunTable", {
-                game_id: game_id,
-                category_id: category_id
-            },
-            function (data) {
-                var runData = data;
-                var runTable = null;
 
+    $.get("/getRunTable", {
+            game_id: game_id,
+            category_id: category_id
+        },
+        function (data) {
+            var runData = data;
+            var runTable = null;
+
+            if (category_id > 0) {
                 runData.forEach(element => {
                     if (runTable == null) {
                         runTable = `<tr><th colspan=5><h2>${element.title} - ${element.category_title}</h2></th></tr><tr><th>User</th><th>Time</th><th>Platform</th><th>Validity</th></tr>`;
@@ -63,14 +64,23 @@ function generateTable(req, res) {
 
                     runTable += `<tr><td>${element.username}</td><td>${element.time}</td><td>${element.name}</td>` + valitity(`${element.valid}`) + `</td></tr>`;
                 });
+            } else if (category_id == 0) {
+                runData.forEach(element => {
+                    if (runTable == null) {
+                        runTable = `<tr><th colspan=5><h2>${element.title}</h2></th></tr>
+                                    <tr><th>User</th><th>Time</th><th>Run Category</th><th>Platform</th><th>Validity</th></tr>`;
+                    }
 
-                console.log(runTable);
+                    runTable += `<tr><td>${element.username}</td><td>${element.time}</td><td>${element.category_title}</td><td>${element.name}</td>` + valitity(`${element.valid}`) + `</td></tr>`;
+                });
+            } else {
+                runTable = "";
+            }
 
-                $('#runTable').html(runTable);
-            });
-    } else {
-        $('#runTable').html("");
-    }
+            console.log(runTable);
+
+            $('#runTable').html(runTable);
+        });
 }
 
 // Trims the leading 0's and :'s
