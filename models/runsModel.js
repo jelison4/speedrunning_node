@@ -21,6 +21,6 @@ function addRunToDB(req, res){
     });
 }
 
-module.exports{
+module.exports={
     addRunToDB: addRunToDB
 };
