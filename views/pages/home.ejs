@@ -37,8 +37,8 @@
             </tr>
         </table>
 
-        <table id='runTable'></table>
-
+        <table id='runTable'>
+        </table>
         <br>
         <table>
             <tr>
@@ -60,8 +60,8 @@
         <span onclick="document.getElementById('login').style.display='none'" class="close"
             title="Close Modal">&times;</span>
 
-        <form class="modal-content background" name='loginForm' action='/user' method="get">
-            <!-- 'event.preventDefault(); verifyLogin();' -->
+        <form class="modal-content background" name='loginForm' onsubmit='event.preventDefault(); login();'
+            action='/user' method="get">
 
             <div class="container">
                 <br>

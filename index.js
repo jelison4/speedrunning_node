@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
-var session = require('express-session');
 require('dotenv').config();
 
 const table = require('./controllers/tableController');
 const game = require('./controllers/gameContoller');
 const category = require('./controllers/categoryController');
 const user = require('./models/userModel');
+const login = require('./controllers/loginController');
 
 const PORT = process.env.PORT || 5000;
 
@@ -19,6 +19,13 @@ const pool = new Pool({
 });
 
 var app = express();
+
+var session = require('express-session');
+app.use(session({
+    secret: 'I_think_harry_potter_is_overrated',
+    resave: false,
+    saveUninitialized: true
+}))
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
@@ -33,6 +40,8 @@ app.get("/getCats", category.getCategorys);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.post("/addUser", user.addUser);
+app.post("/login", login.handleLogin);
+app.post("/logout", login.handleLogout);
 
 app.listen(PORT, function () {
     console.log("Server listening on port " + PORT);
