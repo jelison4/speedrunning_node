@@ -16,7 +16,7 @@ function handleLogin(req, res) {
 
     //req.body.username == "Cadfel" && req.body.password == "password"
 
-    if (pass == getPasswordFromDB(username)) {
+    if (req.body.username == "Cadfel" && req.body.password == "password") {
 
         req.session.user = req.body.username;
         result = {
@@ -28,7 +28,8 @@ function handleLogin(req, res) {
 }
 
 function getPasswordFromDB(username, callback) {
-    var sql = `SELECT password FROM users WHERE username='${username}'`;
+    
+    /* var sql = `SELECT password FROM users WHERE username='${username}'`;
 
     pool.query(sql, function (err, res) {
         if (err) {
@@ -41,7 +42,7 @@ function getPasswordFromDB(username, callback) {
 
         console.log(password);
         //callback(null, res.rows);
-    });
+    }); */
 
 }
 
