@@ -21,6 +21,7 @@ const pool = new Pool({
 var app = express();
 
 var session = require('express-session');
+
 app.use(session({
     secret: 'I_think_harry_potter_is_overrated',
     resave: false,

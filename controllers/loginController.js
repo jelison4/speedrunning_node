@@ -12,26 +12,26 @@ function handleLogin(req, res) {
     };
 
     var username = req.body.username;
-    var pass = req.body.password;
 
-    var password = getPasswordFromDB(username);
-    console.log(password);
-    //req.body.username == "Cadfel" && req.body.password == "password"
+    getPasswordFromDB(username, function (error, result) {
 
-    if (req.body.username == "Cadfel" && req.body.password == "password") {
+        if (req.body.password == result[0].password) {
 
-        req.session.user = req.body.username;
-        result = {
-            success: true
-        };
-    }
+            req.session.user = req.body.username;
+            req.session.user_id = result[0].id;
+        }
+    });
+
+    result = {
+        success: true
+    };
 
     res.json(result);
 }
 
 function getPasswordFromDB(username, callback) {
-    
-    var sql = `SELECT password FROM users WHERE username='${username}';`;
+
+    var sql = `SELECT password, id FROM users WHERE username='${username}';`;
 
     pool.query(sql, function (err, res) {
         if (err) {
@@ -39,11 +39,7 @@ function getPasswordFromDB(username, callback) {
             callback(err, null);
         }
 
-        //var password = res.rows[0].password;
-
-        callback(null, res.rows[0].password);
-        //console.log(password);
-        //callback(null, password);
+        callback(null, res.rows);
     });
 
 }
