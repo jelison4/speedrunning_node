@@ -7,18 +7,24 @@ const pool = new Pool({
 });
 
 function addRunToDB(req, res){
-    var user_id = 2;
-    var game_id = req.query.game_id;
-    var platform_id = req.query.plat_id;
-    var time = req.query.time;
+    /* var user_id = 2;
+    var game_id = req.body.game_id;
+    var platform_id = req.body.plat_id;
+    var time = req.body.time;
     var valid = false;
-    var category_id=req.query.cat_id;
+    var category_id=req.body.category_id; */
 
-    sql=`INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (${user_id}, ${game_id}, ${platform_id}, ${time}, ${valid}, ${category_id});`;
-    pool.query(sql, function(err, result){
+    console.log("user is" + req.session.user);
+
+    /* sql=`INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (${user_id}, ${game_id}, ${platform_id}, '${time}', ${valid}, ${category_id});`;
+
+    console.log(sql); */
+
+    /* pool.query(sql, function(err, result){
         if (err) throw err;
         console.log("New run added");
-    });
+        res.render("pages/success");
+    }); */
 }
 
 module.exports={

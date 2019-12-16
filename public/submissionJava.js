@@ -21,3 +21,43 @@ function loadGames() {
     xhr.open("GET", "/getGames", true);
     xhr.send();
 }
+
+function generateCatDropdown() {
+    //Get the game id
+    var game_id = $('#gameSelect').val();
+
+    if (game_id != 0) {
+        $.ajax({
+            url: `/getCats?id=${game_id}`
+        }).done(function (data) {
+            var categorys = data;
+
+            var categoryDropdown = null;
+
+            categorys.forEach(element => {
+                if(categoryDropdown==null){
+                    categoryDropdown =`<option value=${element.category_id}>${element.category_title}</option>`;
+                }else{
+                    categoryDropdown += `<option value=${element.category_id}>${element.category_title}</option>`;
+                } 
+            });
+
+            $('#runCategory').html(categoryDropdown);
+        });
+    } else {
+        $('#runCategory').html("<option value='-1'>-</option>");
+    }
+}
+
+function insertRun(){
+    var game_id = $('#gameSelect').val();
+    var platform_id = $('#platform').val();
+    var time = $('#time').val();
+    var category_id=$('#runCategory').val();
+
+    //var params={game_id: game_id, platform_id: platform_id, time: time, category_id: category_id};
+    //$.post("/insertRun",params,function(){
+    $.post("/insertRun", function(){
+        window.location.href="/user";
+    });
+}
