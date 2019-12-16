@@ -46,7 +46,7 @@ function getAllRunTableFromDB(game_id, callback) {
 }
 
 function getUserTable(req, res) {
-    var username = req.session.user;
+    var username = 'Cadfel';
 
     getUserData(username, function (error, result) {
         res.json(result);
