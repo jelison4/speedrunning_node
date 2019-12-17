@@ -6,27 +6,36 @@ const pool = new Pool({
     connectionString: connectionString
 });
 
-function addRunToDB(req, res){
-    /* var user_id = 2;
+function addRunToDB(req, res) {
+    var user_id = 2;
     var game_id = req.body.game_id;
     var platform_id = req.body.plat_id;
     var time = req.body.time;
     var valid = false;
-    var category_id=req.body.category_id; */
+    var category_id = req.body.cat_id;
 
-    console.log("user is" + req.session.user);
+    sql = `INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (${user_id}, ${game_id}, ${platform_id}, '${time}', ${valid}, ${category_id});`;
 
-    /* sql=`INSERT INTO run (user_id, game_id, platform_id, time, valid, category_id) VALUES (${user_id}, ${game_id}, ${platform_id}, '${time}', ${valid}, ${category_id});`;
+    console.log(sql);
 
-    console.log(sql); */
-
-    /* pool.query(sql, function(err, result){
+    pool.query(sql, function (err, result) {
         if (err) throw err;
         console.log("New run added");
-        res.render("pages/success");
-    }); */
+        res.render("pages/user");
+    });
 }
 
-module.exports={
-    addRunToDB: addRunToDB
+function removeRunFromDB(req, res) {
+    var runId = req.query.runId;
+    var sql = `DELETE FROM run WHERE id=${runId}`;
+
+    pool.query(sql, function (err, result) {
+        if (err) throw err;
+        res.render("pages/user");
+    });
+}
+
+module.exports = {
+    addRunToDB: addRunToDB,
+    removeRunFromDB: removeRunFromDB
 };

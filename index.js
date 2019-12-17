@@ -42,6 +42,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.post("/addUser", user.addUser);
 app.post("/insertRun", run.addRunToDB);
+app.get("/removeRun", run.removeRunFromDB);
 app.post("/login", login.handleLogin);
 app.post("/logout", login.handleLogout);
 

@@ -73,15 +73,6 @@ function generateTable(req, res) {
         });
 }
 
-// Trims the leading 0's and :'s
-function formatTime(time) {
-    var fTime = ltrim(time, "0");
-    fTime = ltrim(fTime, ":");
-    fTime = ltrim(fTime, "0");
-
-    return fTime;
-}
-
 // changes the bool value for valid into text and 
 function valitity(valid) {
     status = null;

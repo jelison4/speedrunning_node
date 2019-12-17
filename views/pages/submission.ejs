@@ -16,7 +16,7 @@
     </header>
 
     <div class='background'>
-        <form onsubmit="insertRun()">
+        <form action="/insertRun" method=post>
             <table>
                 <tr>
                     <td class='col1'>Time:</td>
@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <td><button class='col1' onclick="window.location.href='/user'">Profile</button></td>
-                    <td><button class='col2' type="submit" onsubmit="insertRun()">Submit Run</button></td>
+                    <td><button class='col2' type="submit">Submit Run</button></td>
                 </tr>
             </table>
         </form>

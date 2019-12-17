@@ -35,11 +35,11 @@ function generateCatDropdown() {
             var categoryDropdown = null;
 
             categorys.forEach(element => {
-                if(categoryDropdown==null){
-                    categoryDropdown =`<option value=${element.category_id}>${element.category_title}</option>`;
-                }else{
+                if (categoryDropdown == null) {
+                    categoryDropdown = `<option value=${element.category_id}>${element.category_title}</option>`;
+                } else {
                     categoryDropdown += `<option value=${element.category_id}>${element.category_title}</option>`;
-                } 
+                }
             });
 
             $('#runCategory').html(categoryDropdown);
@@ -49,15 +49,25 @@ function generateCatDropdown() {
     }
 }
 
-function insertRun(){
+function insertRun() {
     var game_id = $('#gameSelect').val();
     var platform_id = $('#platform').val();
     var time = $('#time').val();
-    var category_id=$('#runCategory').val();
+    var category_id = $('#runCategory').val();
 
-    //var params={game_id: game_id, platform_id: platform_id, time: time, category_id: category_id};
-    //$.post("/insertRun",params,function(){
-    $.post("/insertRun", function(){
-        window.location.href="/user";
+    /* var params = {
+        game_id: game_id,
+        platform_id: platform_id,
+        time: time,
+        category_id: category_id
+    }; */
+
+    $.post("/insertRun", {
+        game_id: game_id,
+        platform_id: platform_id,
+        time: time,
+        category_id: category_id
+    }).done(function () {
+        window.location.href = "/user";
     });
 }

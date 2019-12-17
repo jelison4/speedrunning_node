@@ -15,13 +15,21 @@ function generateUserTable() {
                                 <tr><th>Game</th><th>Time</th><th>Category</th><th>Platform</th><th>Validity</th></tr>`
                 }
 
-                userTable += `<tr><td>${element.title}</td><td>${element.time}</td><td>${element.category_title}</td><td>${element.name}</td>` + valitity(`${element.valid}`) + `</td><td><button class="cancelbtn">Remove</button></td></tr>';`;
+                userTable += `<tr><td>${element.title}</td><td>${element.time}</td><td>${element.category_title}</td><td>${element.name}</td>` + valitity(`${element.valid}`) + `</td><td><button class="cancelbtn" onclick="removeRun(${element.id})">Remove</button></td></tr>';`;
             });
 
             $('#userTable').html(userTable);
         }
     )
 }
+
+function removeRun(runId) {
+    $.ajax(`/removeRun?runId=${runId}`).done(
+        function () {
+            window.location.reload(false);
+        });
+}
+
 
 function valitity(valid) {
     status = null;
